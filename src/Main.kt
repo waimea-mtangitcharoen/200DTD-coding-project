@@ -27,6 +27,15 @@
 fun main() {
     println("Old Gold Game")
     val playerNames = mutableListOf<String>()
+    val squares = mutableListOf<String>()
+
+    squares.add("")
+    squares.add("")
+    squares.add("")
+    squares.add("")
+    squares.add("")
+
+    showSquares(squares)
     showList(playerNames)
     println()
     var smallSize = 5
@@ -35,12 +44,18 @@ fun main() {
     var hugeGrid = 20
     val option = getUserAction()
     when (option) {
-        'A' ->  smallGrid()
+        'A' ->  smallGrid(squares)
         'B' ->  mediumGrid()
         'C' ->  largeGrid()
         'D' ->  hugeGrid()
     }
 
+}
+
+fun showSquares(squareList: MutableList<String>) {
+    for (square in squareList) {
+        println(square)
+    }
 }
 fun showList(list: MutableList<String>) {
     println("Welcome to the fascinating Old Gold Game!")
@@ -55,11 +70,11 @@ fun showList(list: MutableList<String>) {
 //    println("The match of $name1 VS $name2 begins!")
 }
 
-fun smallGrid(){
+fun smallGrid(squareList: MutableList<String>) {
     val smallSize = 5
     print("+----------".repeat(smallSize))
     println("+")
-    print("| %-8d ".format(smallSize).repeat(smallSize))
+    print("| %-8d ".format(square).repeat(smallSize))
     println("|")
     print("+----------".repeat(smallSize))
     println("+")

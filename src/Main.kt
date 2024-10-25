@@ -1,5 +1,3 @@
-@file:Suppress("UNREACHABLE_CODE")
-
 /**
  * ------------------------------------------------------------------------
  * Old Gold In Kotlin!
@@ -26,23 +24,13 @@
  */
 fun main() {
     println("Old Gold Game")
+
     val playerNames = mutableListOf<String>()
     val squares = mutableListOf<String>()
 
-    squares.add("")
-    squares.add("")
-    squares.add("")
-    squares.add("")
-    squares.add("")
+    getPlayerNames(playerNames)
 
-    showSquares(squares)
-    showList(playerNames)
-    println()
-    var smallSize = 5
-    var mediumGrid = 10
-    var largeGrid = 15
-    var hugeGrid = 20
-    val option = getUserAction()
+    val option = getGameSize()
     when (option) {
         'A' ->  smallGrid(squares)
         'B' ->  mediumGrid()
@@ -50,35 +38,51 @@ fun main() {
         'D' ->  hugeGrid()
     }
 
+    addCoins(square)
+
+    var currentPlayer = 0
+
+    while(true) {
+        println("${playerNames[currentPlayer]}, it is your go...")
+        showSquares(squares)
+        // Get user moves
+        // Move coin
+        // Check if won
+//        if (???) {
+//            break
+//        }
+        // Switch to other user
+
+        // Switch player
+        currentPlayer = if (currentPlayer == 0) 1 else 0
+    }
+
 }
 
-fun showSquares(squareList: MutableList<String>) {
-    for (square in squareList) {
+fun showSquares(squares: MutableList<String>) {
+    for (square in squares) {
         println(square)
     }
 }
-fun showList(list: MutableList<String>) {
+fun getPlayerNames(nameList: MutableList<String>) {
     println("Welcome to the fascinating Old Gold Game!")
     println("Start off by enter yours and your mate's name")
     print("Player 1: ")
     val name1 = readln()
-    list.add(name1)
+    nameList.add(name1)
     print("Player 2: ")
     val name2 = readln()
-    list.add(name2)
+    nameList.add(name2)
     println()
 //    println("The match of $name1 VS $name2 begins!")
 }
 
-fun smallGrid(squareList: MutableList<String>) {
-    val smallSize = 5
-    print("+----------".repeat(smallSize))
-    println("+")
-    print("| %-8d ".format(square).repeat(smallSize))
-    println("|")
-    print("+----------".repeat(smallSize))
-    println("+")
+fun smallGrid(squares: MutableList<String>) {
+    repeat(5) {
+        squares.add(" ")
+    }
 }
+
 fun mediumGrid(){
     val mediumSize = 10
     print("+----------".repeat(mediumSize))
@@ -109,7 +113,7 @@ fun hugeGrid() {
 
 
 
-fun getUserAction(): Char{
+fun getGameSize(): Char{
     while(true) {
         // Show options
         println("Select the grid size")

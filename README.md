@@ -18,7 +18,7 @@ BRIEF PROJECT DESCRIPTION HERE
 
 The project is written in [Kotlin](https://kotlinlang.org/)
 
-The main source file is [Main.kt](src/Main.kt)
+The main source file is [Main.kt](src/META-INF/Main.kt)
 
 
 ## Documentation

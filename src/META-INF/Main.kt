@@ -116,7 +116,7 @@ fun getPlayerNames(nameList: MutableList<String>) {
 
 fun getGameSize(squares: MutableList<String>, playerNames: MutableList<String>) {
     println("Enter how big you want your grid size to be. The number of coins will be 2 less than the grid size you have chosen.".bold())
-    println("eg. There are 3 coins in 5 squares grid.".col(193, 250, 139 ))
+    println("eg. There are 3 coins in 5 squares grid.".col(140, 189, 142))
 
     while (true) {
         print("★ Input grid size: ")
@@ -152,7 +152,7 @@ fun getGameSize(squares: MutableList<String>, playerNames: MutableList<String>) 
         println()
         println("Remember, the aim of the game is to be the first person to " + "REMOVE".underline() + " the gold coin.")
         println()
-        print("Press" + " ENTER ".col(193, 250, 139 ) + "to start the game...")
+        print("Press" + " ENTER ".col(140, 189, 142) + "to start the game...")
         readln()
         println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
         println()
@@ -226,12 +226,12 @@ fun playGame(squares: MutableList<String>, playerNames: MutableList<String>): St
         if (selectedCoin == 0 && squares[0] == gCoin) {
             println()
             if (currentPlayer == 0){
-                println("CONGRATULATIONS , " + "${playerNames[currentPlayer]}".col(189,243,255) + "! You just won the legendary match of Old gold coin!! ♔")
+                println("CONGRATULATIONS , " + "${playerNames[currentPlayer]}".col(189,243,255) + "! You just won the legendary match of Old gold coin!! \uD83C\uDFC6 \uD83C\uDF96\uFE0F")
             }else{
-                println("CONGRATULATIONS , " + "${playerNames[currentPlayer]}".col(255,189,205) + "! You just won the legendary match of Old gold coin!! ♔")
+                println("CONGRATULATIONS , " + "${playerNames[currentPlayer]}".col(255,189,205) + "! You just won the legendary match of Old gold coin!! \uD83C\uDFC6 \uD83C\uDF96\uFE0F")
             }
             println()
-            println("Press ENTER to start over...")
+            println("Press " + "ENTER".col(140, 189, 142) + " to start over...")
             println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
             readln()
             main()

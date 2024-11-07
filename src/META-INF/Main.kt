@@ -81,13 +81,13 @@ fun getPlayerNames(nameList: MutableList<String>) {
     while (true) {
         print("★".col(189, 243, 255) + " Player 1: ")
         name1 = readln()
-        //make sure that the user input the name in i.e. it is not empty
-        if (name1.isNotEmpty()) {
+        //make sure that the user input the name in i.e. it is not empty and not too long
+        if (name1.isNotEmpty() && name1.length < 20) {
             nameList.add(name1)
             break
         //otherwise print an error message and ask the user the input their name again
         } else {
-            println("Please enter your name.".red())
+            println("Please enter your name again.".red())
         }
     }
 
@@ -97,7 +97,7 @@ fun getPlayerNames(nameList: MutableList<String>) {
         print("★".col(255,189,205) + " Player 2: ")
         name2 = readln()
     //same as for player 1
-        if (name2.isNotEmpty()) {
+        if (name2.isNotEmpty() && name2.length < 20) {
             if (name2.equals(name1, ignoreCase = true)) {  // Check for name collision
                 println("This name has already been taken. Please enter another name.".red())
             } else {
@@ -107,7 +107,7 @@ fun getPlayerNames(nameList: MutableList<String>) {
             break
             }
         } else {
-            println("Please enter your name.".red())
+            println("Please enter your name again.".red())
         }
     }
 

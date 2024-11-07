@@ -76,32 +76,33 @@ fun showSquares(squares: MutableList<String>) {
 fun getPlayerNames(nameList: MutableList<String>) {
     println("Start off by entering yours and your mate's name".bold())
 
-    // Get Player 1's name with validation
+    //get player 1 name
     var name1: String? = null
     while (true) {
         print("★".col(189, 243, 255) + " Player 1: ")
         name1 = readln()
-
-        if (name1.isNotEmpty()) {  // Check if the name is not empty
+        //make sure that the user input the name in i.e. it is not empty
+        if (name1.isNotEmpty()) {
             nameList.add(name1)
             break
+        //otherwise print an error message and ask the user the input their name again
         } else {
             println("Please enter your name.".red())
         }
     }
 
-    // Get Player 2's name with validation
+    //get Player 2 name
     var name2: String
     while (true) {
         print("★".col(255,189,205) + " Player 2: ")
         name2 = readln()
-
+    //same as for player 1
         if (name2.isNotEmpty()) {
             if (name2.equals(name1, ignoreCase = true)) {  // Check for name collision
                 println("This name has already been taken. Please enter another name.".red())
             } else {
                 nameList.add(name2)
-                break// Check if the name is not empty
+                break
             nameList.add(name2)
             break
             }
@@ -116,13 +117,13 @@ fun getPlayerNames(nameList: MutableList<String>) {
 
 fun getGameSize(squares: MutableList<String>, playerNames: MutableList<String>) {
     println("Enter how big you want your grid size to be. The number of coins will be 2 less than the grid size you have chosen.".bold())
-    println("eg. There are 3 coins in 5 squares grid.".col(193, 250, 139 ))
+    println("eg. There are 3 coins in 5 squares grid.".col(140, 189, 142))
 
     while (true) {
         print("★ Input grid size: ")
         val input = readln()
 
-        // check not null
+        //check not null
         val gridSize = input.toIntOrNull()
         if (gridSize != null && gridSize in 5 .. 30) {
             repeat(gridSize) {
@@ -131,12 +132,15 @@ fun getGameSize(squares: MutableList<String>, playerNames: MutableList<String>) 
             break
         }
         //error messages
+        //when there is no input
         else if (gridSize == null) {
             println("Please enter a number!".red())
         }
+        //min size for gird = 5 squares
         else if (gridSize < 5) {
             println("Too small! (min size = 5)".red())
         }
+        //max size for grid = 30 squares
         else if (gridSize > 30) {
             println("Too large! (max size = 30)".red())
         }
@@ -152,7 +156,7 @@ fun getGameSize(squares: MutableList<String>, playerNames: MutableList<String>) 
         println()
         println("Remember, the aim of the game is to be the first person to " + "REMOVE".underline() + " the gold coin.")
         println()
-        print("Press" + " ENTER ".col(193, 250, 139 ) + "to start the game...")
+        print("Press" + " ENTER ".col(140, 189, 142) + "to start the game...")
         readln()
         println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
         println()
@@ -160,12 +164,11 @@ fun getGameSize(squares: MutableList<String>, playerNames: MutableList<String>) 
 }
 
 fun addCoins(squares: MutableList<String>, sCoin: String, gCoin: String) {
-    // Create a list of available positions (excluding index 0)
+    //create a list of available positions (excluding index 0)
     val availableSquares = (1 until squares.size).toMutableList()
-    availableSquares.shuffle() // Shuffle the positions
+    availableSquares.shuffle() //shuffle
 
-    // Place silver coins
-
+    //conditions for number of silver coins in different grid size
     val silverCoinsCount =
         if (squares.size in 5..7){
             squares.size -3
@@ -181,18 +184,18 @@ fun addCoins(squares: MutableList<String>, sCoin: String, gCoin: String) {
             squares.size -17
         }
 
-//    val silverCoinsCount = squares.size - 3 // Adjust this according to your game's rules
+    //loop until reach number of silver coins
     for (i in 0 until silverCoinsCount) {
         if (availableSquares.isNotEmpty()) {
-            val position = availableSquares.removeAt(0) // Get a unique position
-            squares[position] = sCoin // Place the silver coin
+            val position = availableSquares.removeAt(0) //get a unique position/square
+            squares[position] = sCoin //put the silver coin on
         }
     }
 
-    // Place one gold coin at a unique position
+    //place one gold coin at a unique position/square
     if (availableSquares.isNotEmpty()) {
-        val position = availableSquares.removeAt(0) // Get a unique position for the gold coin
-        squares[position] = gCoin // Place the gold coin
+        val position = availableSquares.removeAt(0)
+        squares[position] = gCoin
     }
     showSquares(squares)
 }
@@ -201,7 +204,7 @@ fun addCoins(squares: MutableList<String>, sCoin: String, gCoin: String) {
 fun playGame(squares: MutableList<String>, playerNames: MutableList<String>): String {
     var selectedCoin: Int
     var move: Int
-
+        //
         if (currentPlayer == 0){
             println("${playerNames[currentPlayer]}, it is your go...".col(189, 243, 255))
         }else{
@@ -222,20 +225,22 @@ fun playGame(squares: MutableList<String>, playerNames: MutableList<String>): St
             }
         }
 
-        // If the far most left square is selected
+        //if the far most left square is selected
+        //if gold coin is on that square
         if (selectedCoin == 0 && squares[0] == gCoin) {
             println()
             if (currentPlayer == 0){
-                println("CONGRATULATIONS , " + "${playerNames[currentPlayer]}".col(189,243,255) + "! You just won the legendary match of Old gold coin!! ♔")
+                println("CONGRATULATIONS , " + "${playerNames[currentPlayer]}".col(189,243,255) + "! You just won the legendary match of Old gold coin!! \uD83C\uDFC6 \uD83C\uDF96\uFE0F")
             }else{
-                println("CONGRATULATIONS , " + "${playerNames[currentPlayer]}".col(255,189,205) + "! You just won the legendary match of Old gold coin!! ♔")
+                println("CONGRATULATIONS , " + "${playerNames[currentPlayer]}".col(255,189,205) + "! You just won the legendary match of Old gold coin!! \uD83C\uDFC6 \uD83C\uDF96\uFE0F")
             }
             println()
-            println("Press ENTER to start over...")
+            println("Press " + "ENTER".col(140, 189, 142) + " to start over...")
             println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
             readln()
             main()
         }
+        //if silver coin is on that square
         else if (selectedCoin == 0 && squares[0] == sCoin){
             squares[0] = " "
             println()
@@ -252,11 +257,11 @@ fun playGame(squares: MutableList<String>, playerNames: MutableList<String>): St
         while (true){
             print("Choose where you want to move to: ")
             move = readln().toIntOrNull() ?: -1
-
-            // Validate the move
+            //use isValidMove() to check for valid moves
             if (move in squares.indices && isValidMove(squares, selectedCoin, move)) {
-                // Make the move by swapping positions
+                //make the move by swapping positions
                 squares[move] = squares[selectedCoin]
+                //square of the selected coin changed to empty space
                 squares[selectedCoin] = " "
                 break
             } else {
@@ -265,7 +270,7 @@ fun playGame(squares: MutableList<String>, playerNames: MutableList<String>): St
                 return (playGame(squares, playerNames))
             }
         }
-
+    //swap player
     currentPlayer = if (currentPlayer == 0){
         1
     } else {
@@ -277,31 +282,31 @@ fun playGame(squares: MutableList<String>, playerNames: MutableList<String>): St
 }
 
 fun isValidMove(squares: MutableList<String>, currentPosition: Int, newPosition: Int): Boolean {
-    //Check if the squares the player wants to move to is within bounds
+    //check if the squares the player wants to move to is within bounds
     if (newPosition < 0 || newPosition >= squares.size) {
         println("Invalid move: out of bounds.".red())
         return false
     }
 
-    // Check if the player is trying to move to the right
+    //check if the player is trying to move to the right
     if (newPosition > currentPosition) {
         println("Invalid move: you cannot move to the right.".red())
         return false
     }
 
-    //Check whether the square the player wants to move to is empty or not
+    //check whether the square the player wants to move to is empty or not
     if (squares[newPosition] != " ") {
         println("Invalid move: you can only move to empty squares.".red())
         return false
     }
 
-    //Check if there is any coin in front when moving to the left
+    //check if there is any coin in front when moving to the left
     if (newPosition < currentPosition - 1 && squares[newPosition + 1] != " ") {
         println("Invalid move: you cannot skip over a coin.".red())
         return false
     }
 
-    //If passed all the conditions above = allow move
+    //if passed all the conditions above = allow move
     return true
 }
 
